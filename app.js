@@ -37,7 +37,7 @@ class CarouselSlider {
     }
 
     playSlideShow() {
-        this.slideShowTimer = setInterval(_ => this.moveRight(), 4000);
+        this.slideShowTimer = setInterval(_ => this.moveRight(), 5000);
     }
 
     stopSlideShow() {
