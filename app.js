@@ -1,45 +1,69 @@
 function main() {
-    const cards$ = document.querySelectorAll(".card"); // array of cards
+    const cards$ = document.querySelectorAll(".card");
     const leftArrows$ = document.querySelectorAll('.left-btn');
     const rightArrows$ = document.querySelectorAll('.right-btn');
 
-    const craousel = new CarouselSlider(0, cards$);
+    const wrapper$ = document.querySelector(".wrapper");
 
-    leftArrows$.forEach(a => a.onclick = () => craousel.moveLeft())
-    rightArrows$.forEach(a => a.onclick = () => craousel.moveRight())
+    const carousel = new CarouselSlider(0, cards$, true);
+
+    leftArrows$.forEach(a => a.onclick = () => carousel.moveLeft());
+    rightArrows$.forEach(a => a.onclick = () => carousel.moveRight());
+
+    wrapper$.addEventListener('mouseover', (ev) => carousel.stopSlideShow());
+    wrapper$.addEventListener('mouseleave', (ev) => carousel.playSlideShow());
 }
 
 class CarouselSlider {
 
-    constructor(startIdx, carouselItems) {
-        this.currentPosition = startIdx
+    constructor(startIdx, carouselItems, autoPlay) {
+        this.currentPosition = startIdx;
         this.carouselItems = carouselItems;
         this.numItems = carouselItems.length;
+
+        if (autoPlay)
+            this.playSlideShow();
     }
 
     /**
      * @param {number} value
      */
     set position(value) {
-        this.currentPosition = Math.abs(value % this.numItems)
+        this.currentPosition = Math.abs(value % this.numItems);
     }
 
     get position() {
         return this.currentPosition;
     }
 
+    playSlideShow() {
+        this.slideShowTimer = setInterval(_ => this.moveRight(), 4000);
+    }
+
+    stopSlideShow() {
+        clearInterval(this.slideShowTimer);
+    }
+
+    setActiveItem(item$, direction) {
+        this.stopSlideShow();
+        this.carouselItems.forEach(i => i.classList.remove("active", "fromRight", "fromLeft"));
+        if (direction == 'left')
+            item$.classList.add("active", "fromRight");
+        else
+            item$.classList.add("active", "fromLeft");
+        this.playSlideShow();
+    }
+
     moveRight() {
         this.position += 1;
         const item$ = this.carouselItems[this.position];
-        this.carouselItems.forEach(i => i.classList.remove("active"));
-        item$.classList.add('active');
+        this.setActiveItem(item$, 'right');
     }
 
     moveLeft() {
         this.position -= 1;
         const item$ = this.carouselItems[this.position];
-        this.carouselItems.forEach(i => i.classList.remove("active"));
-        item$.classList.add('active');
+        this.setActiveItem(item$, 'left');
     }
 }
 
