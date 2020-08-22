@@ -14,9 +14,9 @@
         <style>
             .attribution {
                 position: fixed;
-                bottom: 0;
+                bottom: 10px;
                 margin: auto;
-                font-size: 11px;
+                font-size: 12px;
                 text-align: center;
             }
             .attribution a {
@@ -28,12 +28,13 @@
         <main class="wrapper">
             <article class="card active">
                 <div class="hero">
-                    <img src="/images/pattern-bg.svg" alt="Background Image" class="bg-image" />
-                    <img
-                        src="/images/image-tanya.jpg"
-                        alt="Tanya's Profile Image"
-                        class="profile-image"
-                    />
+                    <div class="img-wrapper">
+                        <img
+                            src="/images/image-tanya.jpg"
+                            alt="Tanya's Profile Image"
+                            class="profile-image"
+                        />
+                    </div>
                     <div class="navigation-buttons">
                         <button class="navigation-button left-btn">
                             <img src="images/icon-prev.svg" alt="Previous Button" /></button
@@ -54,10 +55,15 @@
                     </footer>
                 </blockquote>
             </article>
-            <article class="card">
+            <article class="card active">
                 <div class="hero">
-                    <img src="/images/pattern-bg.svg" alt="Background Image" class="bg-image" />
-                    <img src="/images/image-john.jpg" alt="John's Profile Image" class="profile-image" />
+                    <div class="img-wrapper">
+                        <img
+                            src="/images/image-john.jpg"
+                            alt="John's Profile Image"
+                            class="profile-image"
+                        />
+                    </div>
                     <div class="navigation-buttons">
                         <button class="navigation-button left-btn">
                             <img src="images/icon-prev.svg" alt="Previous Button" /></button
@@ -82,7 +88,7 @@
         <div class="attribution">
             Challenge by
             <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
-            Coded by <a href="#">Your Name Here</a>.
+            Coded by <a href="https://github.com/DarkFM">Clinton Bestmann</a>.
         </div>
     </body>
 </html>
